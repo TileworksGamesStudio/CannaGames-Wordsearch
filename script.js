@@ -8,9 +8,9 @@
   'use strict';
 
   // --- Constants & Config ---
-  const STORAGE_KEY = 'wordsearch_state_v2';
+  const STORAGE_KEY = 'cannawordsearch_state_v2';
   const CSV_FILE = 'puzzles.csv';
-  const HOME_PORTAL_URL = '#';
+  const HOME_PORTAL_URL = 'https://tileworksgamesstudio.github.io/CannaGames-Home/';
   const FUTURE_EXT_URL = '#';
 
   // Verbatim Cannabis Leaf SVG Asset (Section 8)
