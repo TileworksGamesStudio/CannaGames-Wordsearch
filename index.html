@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Word Search</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Atmospheric Foundation: Botanical Olive Atmosphere, Dotted Texture & Floating Cannabis Leaves -->
+  <div class="bg-atmosphere" aria-hidden="true">
+    <div class="bg-micro-glow"></div>
+    <div class="bg-dotted-pinstripe"></div>
+    <div id="iconAtmosphere" class="bg-icon-stream"></div>
+  </div>
+
+  <!-- Primary Application Wrapper -->
+  <div class="app-container">
+
+    <!-- Error View -->
+    <section id="viewError" class="view hidden" role="alert" aria-live="assertive">
+      <div class="card dialog-card text-center with-purple-glow">
+        <h2 class="dialog-title">Puzzle Unavailable</h2>
+        <p id="errorMsg" class="dialog-subtitle">Unable to load puzzle records at this moment.</p>
+        <button type="button" id="btnRetry" class="btn btn-primary btn-block">Try Again</button>
+      </div>
+    </section>
+
+    <!-- Global App Header: Independent Anchor Layout with Gold Detailing -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="#" id="linkHome" class="header-nav-btn" aria-label="Home portal" title="Return to Portal">
+          <svg class="nav-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 10.5 12 3l9 7.5V20a1.5 1.5 0 0 1-1.5 1.5H4.5A1.5 1.5 0 0 1 3 20v-9.5z"/>
+            <path d="M9 21.5V12h6v9.5"/>
+          </svg>
+        </a>
+        <h1 id="appMainTitle" class="app-title">Word Search</h1>
+        <div class="header-spacer" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <!-- Main Menu View: Centered Natural Botanical Layout -->
+    <main id="viewMenu" class="view view-menu">
+      <div class="menu-centerline with-purple-backlight">
+        
+        <!-- Primary Action Stack: 4 Gold-Trimmed Buttons -->
+        <nav class="primary-nav-group" aria-label="Main Menu Navigation">
+          <!-- Button 1: Play Game (Dynamic Labeling) -->
+          <button type="button" id="btnPlayGame" class="menu-btn menu-btn-primary">
+            <div class="menu-btn-content">
+              <span class="menu-btn-title" id="lblPlayAction">Play Word Search</span>
+              <span class="menu-btn-meta" id="lblPlayTheme">Daily Theme</span>
+            </div>
+            <span class="menu-btn-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </span>
+          </button>
+
+          <!-- Button 2: Vault -->
+          <button type="button" id="btnOpenVault" class="menu-btn">
+            <div class="menu-btn-content">
+              <span class="menu-btn-title">Vault</span>
+              <span class="menu-btn-meta">Archive & Past Puzzles</span>
+            </div>
+            <span class="menu-btn-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </span>
+          </button>
+
+          <!-- Button 3: Settings -->
+          <button type="button" id="btnOpenSettings" class="menu-btn">
+            <div class="menu-btn-content">
+              <span class="menu-btn-title">Settings</span>
+              <span class="menu-btn-meta">Preferences & Display</span>
+            </div>
+            <span class="menu-btn-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </span>
+          </button>
+
+          <!-- Button 4: How to Play -->
+          <button type="button" id="btnOpenRules" class="menu-btn">
+            <div class="menu-btn-content">
+              <span class="menu-btn-title">How to Play</span>
+              <span class="menu-btn-meta">Rules & Navigation</span>
+            </div>
+            <span class="menu-btn-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </span>
+          </button>
+        </nav>
+
+        <!-- Bottom Center: Centered Utility Controls with Gold Trim -->
+        <footer class="utility-row" aria-label="Game Utilities">
+          <!-- 1. Player Stats -->
+          <button type="button" id="btnOpenStats" class="utility-btn" aria-label="Player Statistics" title="Player Statistics">
+            <svg class="utility-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 20V10M12 20V4M6 20v-6"/>
+            </svg>
+          </button>
+
+          <!-- 2. Share -->
+          <button type="button" id="btnShareGame" class="utility-btn" aria-label="Share Game" title="Share Game">
+            <svg class="utility-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"/>
+              <circle cx="6" cy="12" r="3"/>
+              <circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </button>
+
+          <!-- 3. Future Extension Plus -->
+          <button type="button" id="btnUtilityPlus" class="utility-btn" aria-label="More Features" title="More Features">
+            <svg class="utility-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+          </button>
+        </footer>
+      </div>
+    </main>
+
+    <!-- Active Gameplay View -->
+    <main id="viewGame" class="view hidden" aria-label="Game Screen">
+      <!-- Gameplay Header -->
+      <div class="game-header">
+        <button type="button" id="btnGameBack" class="btn btn-secondary btn-compact" aria-label="Back to Menu">
+          <svg class="btn-sub-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+          <span>Menu</span>
+        </button>
+        <div class="game-meta-group text-center">
+          <h2 id="gameTitle" class="game-title">Puzzle</h2>
+        </div>
+        <div id="gameTimer" class="game-timer" aria-label="Elapsed Time">00:00</div>
+      </div>
+
+      <!-- Controls & Status Above Board -->
+      <section class="game-controls-top">
+        <nav class="tier-segmented-control" role="tablist" aria-label="Puzzle Tiers">
+          <button type="button" class="tier-tab" data-tier="mini" role="tab" aria-selected="false">Mini (8×8)</button>
+          <button type="button" class="tier-tab" data-tier="midi" role="tab" aria-selected="false">Midi (10×10)</button>
+          <button type="button" class="tier-tab" data-tier="main" role="tab" aria-selected="false">Main (12×12)</button>
+        </nav>
+
+        <div class="status-panel">
+          <span id="wordCounter" class="word-counter" aria-live="polite">0 / 0</span>
+          <span id="currentSelection" class="selection-preview" aria-live="polite">Drag across letters to select</span>
+        </div>
+      </section>
+
+      <!-- Center Star: Game Board with Purple Backlighting & Gold Trim -->
+      <section class="board-area" aria-label="Word Search Grid">
+        <div id="grid" class="word-grid" role="grid"></div>
+      </section>
+
+      <!-- Supporting Word List -->
+      <section class="words-area" aria-label="Words to Find">
+        <header class="words-header">
+          <h3 class="words-title">Words to Find</h3>
+        </header>
+        <ul id="wordList" class="word-list"></ul>
+      </section>
+    </main>
+
+    <!-- Vault Archive View -->
+    <main id="viewVault" class="view hidden" aria-label="Past Puzzles Archive">
+      <div class="game-header">
+        <button type="button" id="btnVaultBack" class="btn btn-secondary btn-compact" aria-label="Back to Menu">
+          <svg class="btn-sub-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+          <span>Menu</span>
+        </button>
+        <h2 class="game-title">Past Puzzles Vault</h2>
+        <div class="header-spacer" aria-hidden="true"></div>
+      </div>
+      <div id="vaultList" class="vault-list" role="list"></div>
+    </main>
+
+  </div><!-- /app-container -->
+
+  <!-- Global Feedback Toast -->
+  <div id="appToast" class="app-toast" role="status" aria-live="polite"></div>
+
+  <!-- HOW TO PLAY PANEL: Gold Trim & Purple Backlighting -->
+  <aside id="panelHowToPlay" class="side-panel-overlay hidden" aria-modal="true" role="dialog" aria-labelledby="rulesTitle">
+    <div class="side-panel-card with-purple-backlight">
+      <div class="panel-header">
+        <h3 id="rulesTitle" class="panel-title">How to Play</h3>
+        <button type="button" id="btnCloseRules" class="btn btn-secondary btn-compact btn-icon-only" aria-label="Close How to Play">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="panel-scroll-body">
+        <p class="panel-lead">Search and discover all themed words concealed within the letter grid.</p>
+        
+        <div class="rule-block">
+          <div class="rule-num">1</div>
+          <div class="rule-text">
+            <strong>Select in Straight Lines</strong>
+            <p>Drag or touch from the first letter to the last letter of any word. Words run horizontally, vertically, or diagonally in either direction.</p>
+          </div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-num">2</div>
+          <div class="rule-text">
+            <strong>Three Daily Tiers</strong>
+            <p>Each release provides three distinct sizes: <strong>Mini (8×8)</strong> for quick play, <strong>Midi (10×10)</strong>, and <strong>Main (12×12)</strong> for a deeper challenge.</p>
+          </div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-num">3</div>
+          <div class="rule-text">
+            <strong>Word Recognition</strong>
+            <p>Discovered words strike through on your list and stay highlighted in botanical green on the board. Complete all words to seal your time.</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <button type="button" id="btnAcknowledgeRules" class="btn btn-primary btn-block">Understood</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SETTINGS MODAL DIALOG -->
+  <dialog id="modalSettings" class="modal">
+    <div class="card dialog-card with-purple-backlight">
+      <div class="modal-head">
+        <h3 class="dialog-title">Settings</h3>
+        <button type="button" class="btn-close" data-close="modalSettings" aria-label="Close Settings">✕</button>
+      </div>
+      <div class="settings-content">
+        <div class="setting-row">
+          <div class="setting-info">
+            <strong class="setting-name">Background Animation</strong>
+            <span class="setting-desc">Calm floating background cannabis leaves</span>
+          </div>
+          <button type="button" id="btnToggleAnimation" class="toggle-switch-btn" role="switch" aria-checked="true">
+            <span class="toggle-indicator"></span>
+            <span id="lblAnimationState" class="toggle-label">On</span>
+          </button>
+        </div>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary btn-block" data-close="modalSettings">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- PLAYER STATISTICS MODAL DIALOG -->
+  <dialog id="modalStats" class="modal">
+    <div class="card dialog-card with-purple-backlight">
+      <div class="modal-head">
+        <h3 class="dialog-title">Player Statistics</h3>
+        <button type="button" class="btn-close" data-close="modalStats" aria-label="Close Statistics">✕</button>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span id="statPlayed" class="stat-figure">0</span>
+          <span class="stat-caption">Played</span>
+        </div>
+        <div class="stat-box">
+          <span id="statSolved" class="stat-figure">0</span>
+          <span class="stat-caption">Solved</span>
+        </div>
+        <div class="stat-box">
+          <span id="statStreak" class="stat-figure">0</span>
+          <span class="stat-caption">Streak</span>
+        </div>
+        <div class="stat-box">
+          <span id="statBestStreak" class="stat-figure">0</span>
+          <span class="stat-caption">Best</span>
+        </div>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary btn-block" data-close="modalStats">Close</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- VICTORY MODAL DIALOG -->
+  <dialog id="modalVictory" class="modal">
+    <div class="card dialog-card text-center with-purple-backlight">
+      <div class="victory-icon-wrap" aria-hidden="true">✓</div>
+      <h3 class="victory-title">Puzzle Complete!</h3>
+      <p id="victoryText" class="dialog-subtitle">All words discovered.</p>
+      <div class="dialog-actions">
+        <button type="button" id="btnVictoryNext" class="btn btn-primary btn-block">Next Tier</button>
+        <button type="button" class="btn btn-secondary btn-block" data-close="modalVictory">Menu</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
